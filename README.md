@@ -5,4 +5,4 @@
 <a href="https://github.com/just-rene/showcase-application/blob/main/.github/workflows/maven-publish.yml" rel="nofollow">Github Actions</a> <br>
 <a href="https://github.com/just-rene/cdk-docker-nginx-deployment" rel="nofollow"> AWS Cloud Development Kit (CDK) </a>
 
-<img src="showcase.jpg" alt="Girl in a jacket">
+<img src="showcase.jpg" alt="showcase picture">

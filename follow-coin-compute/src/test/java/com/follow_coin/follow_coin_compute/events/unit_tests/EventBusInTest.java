@@ -1,6 +1,5 @@
 package com.follow_coin.follow_coin_compute.events.unit_tests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.follow_coin.follow_coin_compute.dtos.CoinPriceEvent;
 import com.follow_coin.follow_coin_compute.entities.CoinPrice;
@@ -16,11 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.TestPropertySource;
-import org.testcontainers.containers.MongoDBContainer;
-import org.testcontainers.junit.jupiter.Container;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
@@ -30,6 +25,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+//Unit Tests
 @ActiveProfiles("test")
 @ExtendWith(MockitoExtension.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -44,15 +40,15 @@ class EventBusInTest {
     @InjectMocks
     public EventBusIn eventBusIn;
 
-    @Container
-    static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0").withExposedPorts(27017);
-
-    @DynamicPropertySource
-    static void containersProperties(DynamicPropertyRegistry registry) {
-        mongoDBContainer.start();
-        registry.add("spring.data.mongodb.host", mongoDBContainer::getHost);
-        registry.add("spring.data.mongodb.port", mongoDBContainer::getFirstMappedPort);
-    }
+//    @Container
+//    static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0").withExposedPorts(27017);
+//
+//    @DynamicPropertySource
+//    static void containersProperties(DynamicPropertyRegistry registry) {
+//        mongoDBContainer.start();
+//        registry.add("spring.data.mongodb.host", mongoDBContainer::getHost);
+//        registry.add("spring.data.mongodb.port", mongoDBContainer::getFirstMappedPort);
+//    }
 
     @BeforeEach
     void setUp() {
@@ -105,7 +101,7 @@ class EventBusInTest {
     }
 
     @Test
-    void test_null_message()  {
+    void test_null_message() {
 
         Mockito.when(coinPriceEventRepo.save(null)).thenReturn(Mono.empty());
 
@@ -119,7 +115,7 @@ class EventBusInTest {
     }
 
     @Test
-    void test_first_event_arrives()  {
+    void test_first_event_arrives() {
 
         //test what happens when the first event arrives
 

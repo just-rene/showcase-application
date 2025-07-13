@@ -28,7 +28,7 @@ jobs:
       run: mvn -B package --file follow-coin-compute/pom.xml -Dmaven.test.skip=false
     - uses: actions/upload-artifact@v4
       with:
-        path: /home/runner/work/follow-coin/follow-coin/follow-coin-compute/target/follow-coin-compute-0.0.1-SNAPSHOT.jar
+        path: /home/runner/work/showcase-application/showcase-application/follow-coin-compute/target/follow-coin-compute-0.0.1-SNAPSHOT.jar
 
   build-image:
         runs-on: ubuntu-latest

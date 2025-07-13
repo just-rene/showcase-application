@@ -72,7 +72,7 @@ class EventBusInTest {
     }
 
     @Test
-    void test_well_formed_message() throws JsonProcessingException {
+    void test_well_formed_message() {
 
         //test if standard behavior works
 
@@ -99,13 +99,13 @@ class EventBusInTest {
         //when
         var res = eventBusIn.computeCoinPriceDifference(coinPriceEvent).block();
 
-        assertEquals(2, res.getDifferenceAbsolute());
-        assertEquals("BTC", res.getSymbol());
+        assertEquals(2, res.getDifferenceAbsolute(), "difference should be 2");
+        assertEquals("BTC", res.getSymbol(), "wrong symbol, should be BTC");
 
     }
 
     @Test
-    void test_null_message() throws JsonProcessingException {
+    void test_null_message()  {
 
         Mockito.when(coinPriceEventRepo.save(null)).thenReturn(Mono.empty());
 
@@ -119,7 +119,7 @@ class EventBusInTest {
     }
 
     @Test
-    void test_first_event_arrives() throws JsonProcessingException {
+    void test_first_event_arrives()  {
 
         //test what happens when the first event arrives
 
@@ -148,7 +148,7 @@ class EventBusInTest {
 
         //then
         //if only one entry exists it should just be ignored, no exceptions should be thrown
-        assert res == null;
+        assertNull(res, "if only one entry exists it should just be ignored, no exceptions should be thrown");
 
     }
 }

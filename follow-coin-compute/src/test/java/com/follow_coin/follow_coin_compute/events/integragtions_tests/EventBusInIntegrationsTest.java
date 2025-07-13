@@ -1,6 +1,5 @@
 package com.follow_coin.follow_coin_compute.events.integragtions_tests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.follow_coin.follow_coin_compute.dtos.CoinPriceDifferenceEvent;
 import com.follow_coin.follow_coin_compute.dtos.CoinPriceEvent;
 import com.follow_coin.follow_coin_compute.entities.CoinPrice;
@@ -10,7 +9,6 @@ import com.follow_coin.follow_coin_compute.repos.CoinPriceEventRepo;
 import io.awspring.cloud.autoconfigure.core.AwsAutoConfiguration;
 import io.awspring.cloud.autoconfigure.sqs.SqsAutoConfiguration;
 import io.awspring.cloud.sqs.operations.SqsTemplate;
-import org.apache.commons.lang3.function.Suppliers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -19,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -29,12 +26,10 @@ import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 import java.util.UUID;
-import java.util.function.Supplier;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.contains;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -81,7 +76,7 @@ class EventBusInIntegrationsTest {
     }
 
     @Test
-    void integration_does_save_work() throws JsonProcessingException {
+    void integration_does_save_work() {
 
         //set up
         CoinPriceKey coinPriceKey = new CoinPriceKey("COIN", "2025-07-11T11:11:00.000Z");
@@ -101,7 +96,7 @@ class EventBusInIntegrationsTest {
     }
 
     @Test
-    void integration_does_difference_event_get_computed_correctly() throws JsonProcessingException {
+    void integration_does_difference_event_get_computed_correctly() {
 
         //set up
 
@@ -120,12 +115,12 @@ class EventBusInIntegrationsTest {
         CoinPriceDifferenceEvent coinPriceDifferenceEvent = eventBusIn.computeCoinPriceDifference(coinPriceEvent2).block();
 
         //then
-        assert coinPriceDifferenceEvent != null;
-        assertEquals(10.0 - 15.0, coinPriceDifferenceEvent.getDifferenceAbsolute(), "");
+        assertNotNull(coinPriceDifferenceEvent);
+        assertEquals(10.0 - 15.0, coinPriceDifferenceEvent.getDifferenceAbsolute(), "wrong difference");
     }
 
     @Test
-    void integration_does_not_compute_difference_event_between_different_coins() throws JsonProcessingException {
+    void integration_does_not_compute_difference_event_between_different_coins() {
 
         //set up
 

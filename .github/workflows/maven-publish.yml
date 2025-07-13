@@ -46,7 +46,7 @@ jobs:
           - uses: mr-smithers-excellent/docker-build-push@v6
             name: Build & push Docker image
             with:
-              image: unknown/main
+              image: unknowntheory/follow-coin-compute
               registry: docker.io
               tags: v1, latest
               username: ${{ secrets.DOCKER_USERNAME }}

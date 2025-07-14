@@ -39,17 +39,7 @@ class EventBusInTest {
 
     @InjectMocks
     public EventBusIn eventBusIn;
-
-//    @Container
-//    static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0").withExposedPorts(27017);
-//
-//    @DynamicPropertySource
-//    static void containersProperties(DynamicPropertyRegistry registry) {
-//        mongoDBContainer.start();
-//        registry.add("spring.data.mongodb.host", mongoDBContainer::getHost);
-//        registry.add("spring.data.mongodb.port", mongoDBContainer::getFirstMappedPort);
-//    }
-
+    
     @BeforeEach
     void setUp() {
     }
